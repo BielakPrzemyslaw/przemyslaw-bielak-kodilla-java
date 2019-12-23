@@ -3,7 +3,7 @@ class SimpleSubstract
 {
     public double substractBFromA(double a, double b) {
 
-        return a * b;
+        return a - b;
     }
 }
 
