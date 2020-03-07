@@ -5,4 +5,5 @@ include 'kodilla-stream'
 include 'kodilla-stream:src:main:java:kodilla-exception'
 findProject(':kodilla-stream:src:main:java:kodilla-exception')?.name = 'kodilla-exception'
 include 'kodilla-exception'
+include 'kodilla-good-patterns'
 
