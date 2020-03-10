@@ -28,6 +28,13 @@ public class OrderRetriever {
 
         orderRequestList.add(new OrderRequest(customer1, foodProducer1, productsList1));
 
+        Customer customer2 = new Customer("WhiliamThell");
+        FoodProducer foodProducer2 = new HealthyShop();
+        Map<Product, Integer> productsList2 = new HashMap<>();
+        productsList.put(new MeatProduct("beef", "T-bone"), 4);
+
+        orderRequestList.add(new OrderRequest(customer2, foodProducer2, productsList2));
+
         return orderRequestList;
 
     }
