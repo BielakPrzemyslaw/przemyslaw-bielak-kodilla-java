@@ -1,0 +1,34 @@
+package com.kodilla.good.patterns.challenges.food2door;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class OrderRetriever {
+
+    public List<OrderRequest> retrieve() {
+        List<OrderRequest> orderRequestList = new ArrayList<>();
+
+        Customer customer = new Customer("ThomasPadington");
+        FoodProducer foodProducer = new GlutenFreeShop();
+        Map<Product, Integer> productsList = new HashMap<>();
+        productsList.put(new GlutenFreeProduct("cookies", "Oat biscuits"), 45);
+        productsList.put(new GlutenFreeProduct("snacks", "The simply delicious guilt-free snack"), 8);
+        productsList.put(new GlutenFreeProduct("rice", "Brown rice"), 1);
+
+        orderRequestList.add(new OrderRequest(customer, foodProducer, productsList));
+
+        Customer customer1 = new Customer("JimBeans");
+        FoodProducer foodProducer1 = new GlutenFreeShop();
+        Map<Product, Integer> productsList1 = new HashMap<>();
+        productsList.put(new GlutenFreeProduct("cookies", "Oat biscuits"), 45);
+        productsList.put(new GlutenFreeProduct("snacks", "The simply delicious guilt-free snack"), 8);
+        productsList.put(new GlutenFreeProduct("rice", "Brown rice"), 1);
+
+        orderRequestList.add(new OrderRequest(customer1, foodProducer1, productsList1));
+
+        return orderRequestList;
+
+    }
+}

@@ -9,7 +9,7 @@ public class ProductOrderDTO {
     private int quantity;
     private boolean isSuccesfullySold;
 
-    public ProductOrderDTO(User user, LocalDateTime orderDate, int quantity, boolean isSuccesfullySold) {
+    public ProductOrderDTO(User user, LocalDateTime orderDate, Product product, int quantity, boolean isSuccesfullySold) {
         this.user = user;
         this.orderDate = orderDate;
         this.quantity = quantity;
@@ -21,14 +21,17 @@ public class ProductOrderDTO {
     }
 
     public LocalDateTime getOrderDate() {
+
         return orderDate;
     }
 
     public int getQuantity() {
+
         return quantity;
     }
 
     public boolean isSuccesfullySold() {
+
         return isSuccesfullySold;
     }
 }
