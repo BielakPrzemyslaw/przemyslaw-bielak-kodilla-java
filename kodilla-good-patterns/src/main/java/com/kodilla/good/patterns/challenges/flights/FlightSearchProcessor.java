@@ -1,6 +1,6 @@
 package com.kodilla.good.patterns.challenges.flights;
 
-import java.time.LocalTime;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,43 +8,47 @@ import java.util.stream.Collectors;
 
 public class FlightSearchProcessor {
 
-    public List<Flight> departureAirportSearch (ArrayList<Flight> currentFlightList, String selectedAirport) {
-        return currentFlightList.stream()
-                .filter(n -> n.getArrivalAirport().equals(selectedAirport))
-                .collect(Collectors.toList());
+    private final HashMap<String, Flight> flightPlan = new HashMap<>();
+
+    public void addFlight(Flight flight) {
+        flightPlan.put(flight.getFlightNumber(), flight);
     }
 
-    public List<Flight> arrivalAirportSearch (ArrayList<Flight> currentFlightList, String selectedAirport) {
-        return currentFlightList.stream()
-                .filter(n -> n.getArrivalAirport().equals(selectedAirport))
+    public List<Flight> searchDepartureAirport(Airport airport) {
+
+        List<Flight> resultsDepartureAirport = flightPlan.values().stream()
+                .filter(flight -> flight.getDepartureAirport().equals(airport))
                 .collect(Collectors.toList());
+        return resultsDepartureAirport;
+
     }
 
-    public List<Flight> getDeparturesAfterLocalTime (ArrayList<Flight> currentFlightList, String selectedAirport, LocalTime arrivalTime) {
+    public List<Flight> searchArrivalAirport(Airport airport) {
 
-        return departureAirportSearch(currentFlightList, selectedAirport).stream()
-                .filter(n -> n.getDepartureTime().isAfter(arrivalTime))
+        List<Flight> resultsArrivalAirport = flightPlan.values().stream()
+                .filter(flight -> flight.getArrivalAirport().equals(airport))
                 .collect(Collectors.toList());
+        return  resultsArrivalAirport;
+
     }
 
-    public HashMap<Flight, Flight> connectionFlightSearch (ArrayList<Flight> currentFlightList, String departureAirport, String arrivalAirport) {
+    public List<Flight> searchTransferFlight(Airport departureAirport, Airport destinationAirport, Airport transferAirport) {
+        List<Flight> resultsTransferFlight = new ArrayList<>();
 
-        List<Flight> flightsFromDestination = departureAirportSearch(currentFlightList, departureAirport);
+        Flight searchFirstFlight = flightPlan.values().stream()
+                .filter(flight -> flight.getDepartureAirport().equals(departureAirport))
+                .filter(flight -> flight.getArrivalAirport().equals(transferAirport))
+                .findAny().get();
 
-        HashMap<Flight, Flight> connectedFlights = new HashMap<>();
-        List<Flight> connectionOption;
+        Flight searchSecondFlight = flightPlan.values().stream()
+                .filter(flight -> flight.getDepartureAirport().equals(transferAirport))
+                .filter(flight -> flight.getArrivalAirport().equals(destinationAirport))
+                .findAny().get();
 
-        for (int i1 = 0; i1 < flightsFromDestination.size(); i1++) {
+        resultsTransferFlight.add(searchFirstFlight);
+        resultsTransferFlight.add(searchSecondFlight);
 
-            connectionOption = getDeparturesAfterLocalTime(currentFlightList, flightsFromDestination.get(i1).getArrivalAirport(), flightsFromDestination.get(i1).getArrivalTime());
-
-            for (int i2 = 0; i2 < connectionOption.size(); i2++) {
-                if ((connectionOption.get(i2).getArrivalAirport()).equals(arrivalAirport)) {
-                    connectedFlights.put(flightsFromDestination.get(i1), connectionOption.get(i2));
-                }
-            }
-        }
-        return connectedFlights;
+        return resultsTransferFlight;
     }
 
 }
