@@ -9,6 +9,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BoardTestSuite {
@@ -20,18 +22,18 @@ public class BoardTestSuite {
         Board board = context.getBean(Board.class);
 
         //When
-        String taskToDo = "task to do";
-        String taskInProgress = "task in progress";
-        String taskDone = "task done";
-        board.getToDoList().addTasks(taskToDo);
-        board.getInProgressList().addTasks(taskInProgress);
-        board.getDoneList().addTasks(taskDone);
+        List<String> toDo = board.getToDoList().getTasks();
+        toDo.add("Task to do");
 
-        //When
-        Assert.assertEquals("task to do", board.getToDoList().getTasks().get(0));
-        Assert.assertEquals("task in progress", board.getInProgressList().getTasks().get(0));
-        Assert.assertEquals("task done", board.getDoneList().getTasks().get(0));
+        List<String> inProgress = board.getInProgressList().getTasks();
+        inProgress.add("Task in progress");
 
+        List<String> done = board.getDoneList().getTasks();
+        done.add("Task done");
+        //Then
+        Assert.assertEquals("Task to do", toDo.get(0));
+        Assert.assertEquals("Task in progress", inProgress.get(0));
+        Assert.assertEquals("Task done", done.get(0));
     }
 
 }
