@@ -18,9 +18,9 @@ public class ShapeFactory {
         Random generator = new Random();
         int chosen = generator.nextInt(3);
         if (chosen == 0) {
-            theShape = new Circle();
-        } else if (chosen == 1) {
             theShape = new Triangle();
+        } else if (chosen == 1) {
+            theShape = new Circle();
         } else {
             theShape = new Square();
         }

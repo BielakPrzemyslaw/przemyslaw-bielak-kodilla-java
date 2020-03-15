@@ -40,7 +40,7 @@ public class SpringRunnerTestSuite {
     }
 
     @Test
-    public void testSquareLoadedIntoConteiner() {
+    public void testSquareLoadedIntoContainer() {
         //Given
         ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
         Shape shape = context.getBean(Square.class);
