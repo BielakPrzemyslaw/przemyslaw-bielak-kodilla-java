@@ -9,31 +9,42 @@ public class TaskFactoryTestSuite {
         //Given
         TaskFactory factory = new TaskFactory();
         //When
-        Task shopping = factory.executor(TaskFactory.SHOPPING);
+        Task shopping = factory.makeTask(TaskFactory.SHOPPING,"My shopping list","bread","10.0");
+        boolean beforeExecution = shopping.isTaskExecuted();
         shopping.executeTask();
         //Then
-        Assert.assertEquals("Do shopping", shopping.getTaskName());
+        Assert.assertEquals("My shopping list", shopping.getTaskName());
+        Assert.assertFalse(beforeExecution);
+        Assert.assertTrue(shopping.isTaskExecuted());
     }
 
     @Test
-    public void testFactoryPainting() {
+    public void testMakePaintingTask() {
         //Given
         TaskFactory factory = new TaskFactory();
         //When
-        Task painting = factory.executor(TaskFactory.PAINTING);
+        Task painting = factory.makeTask(TaskFactory.PAINTING,"What color use","read","my figurine cloak");
+        boolean beforeExecution = painting.isTaskExecuted();
         painting.executeTask();
         //Then
-        Assert.assertEquals("What color you like", painting.getTaskName());
+        Assert.assertEquals("What color use", painting.getTaskName());
+        Assert.assertFalse(beforeExecution);
+        Assert.assertTrue(painting.isTaskExecuted());
     }
 
     @Test
-    public void testFactoryDriving() {
+    public void testMakeDrivingTask() {
         //Given
         TaskFactory factory = new TaskFactory();
         //When
-        Task driving = factory.executor(TaskFactory.DRIVING);
+        Task driving = factory.makeTask(TaskFactory.DRIVING,"Where you ride ","yellow","my painting blue track");
+        boolean beforeExecution = driving.isTaskExecuted();
         driving.executeTask();
         //Then
-        Assert.assertEquals("You have licens", driving.getTaskName());
+        Assert.assertEquals("Where you ride ", driving.getTaskName());
+        Assert.assertFalse(beforeExecution);
+        Assert.assertTrue(driving.isTaskExecuted());
     }
+
+
 }

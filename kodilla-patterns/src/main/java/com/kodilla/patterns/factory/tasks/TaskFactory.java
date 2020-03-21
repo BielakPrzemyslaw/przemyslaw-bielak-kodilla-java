@@ -6,14 +6,14 @@ public class TaskFactory {
     public static final String PAINTING = "PAINTING";
     public static final String DRIVING = "DRIVING";
 
-    public final Task executor(final String taskClass) {
-        switch(taskClass) {
+    public final Task makeTask(final String typeOfTask, String taskName, String colorOrWhatToBuy, String whatToPaintOrUsingOrQuantity) {
+        switch(typeOfTask) {
             case SHOPPING:
-                return new ShoppingTask("Do shopping", "Bread", 10.0);
+                return new ShoppingTask(taskName, colorOrWhatToBuy, Double.parseDouble(whatToPaintOrUsingOrQuantity));
             case PAINTING:
-                return new PaintingTask("What color you like", "Pink", "Car");
+                return new PaintingTask(taskName, colorOrWhatToBuy, whatToPaintOrUsingOrQuantity);
             case DRIVING:
-                return new DrivingTask("You have licens", "home", "your car");
+                return new DrivingTask(taskName, colorOrWhatToBuy, whatToPaintOrUsingOrQuantity);
             default:
                 return null;
         }

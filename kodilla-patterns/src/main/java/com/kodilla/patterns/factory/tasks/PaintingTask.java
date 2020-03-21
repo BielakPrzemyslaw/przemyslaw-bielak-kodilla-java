@@ -1,16 +1,17 @@
 package com.kodilla.patterns.factory.tasks;
 
-import java.util.Random;
-
 public class PaintingTask implements Task {
-    final String taskName;
-    final String color;
-    final String whatToPaint;
+    private String taskName;
+    private String color;
+    private String whatToPaint;
+    private boolean isExecuted;
 
     public PaintingTask(String taskName, String color, String whatToPaint) {
         this.taskName = taskName;
         this.color = color;
         this.whatToPaint = whatToPaint;
+        isExecuted = false;
+
     }
 
     @Override
@@ -20,18 +21,12 @@ public class PaintingTask implements Task {
 
     @Override
     public void executeTask() {
-        System.out.println("Task approached: " + getTaskName());
-        if(isTaskExecuted()) {
-            System.out.println("Completed.");
-        } else {
-            System.out.println("Not completed.");
-        }
+        isExecuted = true;
     }
 
     @Override
     public boolean isTaskExecuted() {
-        Random random = new Random();
-        return random.nextBoolean();
+       return isExecuted;
     }
 
 }

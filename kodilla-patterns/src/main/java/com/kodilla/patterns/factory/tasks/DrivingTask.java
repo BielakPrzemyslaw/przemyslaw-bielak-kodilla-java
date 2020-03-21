@@ -1,16 +1,16 @@
 package com.kodilla.patterns.factory.tasks;
 
-import java.util.Random;
-
 public class DrivingTask implements Task {
-    final String taskName;
-    final String where;
-    final String using;
+    private String taskName;
+    private String where;
+    private String using;
+    private boolean isExecuted;
 
     public DrivingTask(String taskName, String where, String using) {
         this.taskName = taskName;
         this.where = where;
         this.using = using;
+        isExecuted = false;
     }
 
     @Override
@@ -20,17 +20,11 @@ public class DrivingTask implements Task {
 
     @Override
     public void executeTask() {
-        System.out.println("Task approached: " + getTaskName());
-        if(isTaskExecuted()) {
-            System.out.println("Completed.");
-        } else {
-            System.out.println("Not completed.");
-        }
+        isExecuted = true;
     }
 
     @Override
     public boolean isTaskExecuted() {
-        Random random = new Random();
-        return random.nextBoolean();
+        return isExecuted;
     }
 }
