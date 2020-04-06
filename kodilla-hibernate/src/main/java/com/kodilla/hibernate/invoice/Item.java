@@ -33,7 +33,7 @@ public class Item {
     }
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "PRODUCT_ID")
     public Product getProduct() {
         return product;
@@ -60,7 +60,7 @@ public class Item {
         return invoice;
     }
 
-    private void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 

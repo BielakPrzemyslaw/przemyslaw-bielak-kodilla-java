@@ -20,13 +20,12 @@ import java.util.List;
 @SpringBootTest
 public class InvoiceDaoTestSuite {
     @Autowired
-    InvoiceDao invoiceDao;
+    private InvoiceDao invoiceDao;
 
     @Test
     public void testInvoiceDaoSave() {
-        //Given
-        Invoice invoice = new Invoice("0245/03/2020");
 
+        //Given
         Product pasta = new Product("Pasta");
         Product milk = new Product("Milk 3%");
         Product rice = new Product("White rice");
@@ -35,32 +34,25 @@ public class InvoiceDaoTestSuite {
         Item itemMilk = new Item(milk, new BigDecimal(2.80), 4);
         Item itemRice = new Item(rice, new BigDecimal(4.20), 3);
 
+        Invoice invoice = new Invoice("0245/03/2020");
+
         itemPasta.setInvoice(invoice);
         itemMilk.setInvoice(invoice);
         itemRice.setInvoice(invoice);
 
-        List<Item> items = new ArrayList<>();
-        items.add(itemPasta);
-        items.add(itemMilk);
-        items.add(itemRice);
-
-        invoice.setItems(items);
+        invoice.getItems().add(itemPasta);
+        invoice.getItems().add(itemMilk);
+        invoice.getItems().add(itemRice);
 
         //When
         invoiceDao.save(invoice);
-        int invoiceId = invoice.getId();
-        int itemSize = invoice.getItems().size();
-
-        Invoice invoiceReadFrom = invoiceDao.findById(invoiceId);
 
         //Then
-        Assert.assertEquals(invoiceId, invoiceReadFrom.getId());
-        Assert.assertEquals(3, itemSize);
-        Assert.assertEquals(itemSize, invoiceReadFrom.getItems().size());
+        int id = invoice.getId();
+        Assert.assertNotEquals(3, id);
 
         //CleanUp
-        invoiceDao.deleteById(invoiceId);
-        invoiceDao.deleteById(itemSize);
+       invoiceDao.deleteById(id);
 
     }
 }
