@@ -49,7 +49,7 @@ public class InvoiceDaoTestSuite {
 
         //Then
         int id = invoice.getId();
-        Assert.assertNotEquals(3, id);
+        Assert.assertNotEquals(0, id);
 
         //CleanUp
        invoiceDao.deleteById(id);
