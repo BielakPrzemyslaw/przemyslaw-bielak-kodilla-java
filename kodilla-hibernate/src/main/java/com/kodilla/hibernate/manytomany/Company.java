@@ -6,9 +6,9 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedNativeQueries({
+/*@NamedNativeQueries({
         @NamedNativeQuery(
-                name="Company.findByPartyOfNameForFirstThreeChar",
+                name="Company.retrieveCompanyNameLike",
                 query =" SELECT *\n" +
                         "from companies \n" +
                         "WHERE SUBSTRING(company_name, 1 , 3) =:PARTY_OF_NAME",
@@ -22,6 +22,22 @@ import java.util.List;
                 resultClass = Company.class
         )
 })
+*/
+
+@NamedNativeQueries({
+        @NamedNativeQuery(
+                name = "Company.retrieveCompanyByNameBegin",
+                query = "SELECT * FROM COMPANIES WHERE SUBSTRING(COMPANY_NAME,1,3) = :CHARSET",
+                resultClass = Company.class
+        ),
+
+        @NamedNativeQuery(
+                name = "Company.retrieveCompanyByPartOfName",
+                query = "SELECT * FROM COMPANIES WHERE COMPANY_NAME LIKE CONCAT('%',:COMPANYPARTOFNAME,'%')",
+                resultClass = Company.class
+        )
+})
+
 
 @Entity
 @Table(name = "COMPANIES")

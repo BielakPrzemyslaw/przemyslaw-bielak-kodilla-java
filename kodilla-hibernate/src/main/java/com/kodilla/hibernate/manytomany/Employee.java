@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedQuery(
+/*@NamedQuery(
         name = "Employee.findByLastName",
         query = "FROM Employee WHERE lastname = :LASTNAME"
 )
@@ -16,6 +16,20 @@ import java.util.List;
                 "WHERE CONCAT(firstname,' ',lastname) like  CONCAT('%',:PARTY_OF_NAME,'%') ",
         resultClass = Employee.class
 )
+
+ */
+
+@NamedQueries({
+
+        @NamedQuery(
+                name = "Employee.retrieveEmployeeByLastname",
+                query = "FROM Employee WHERE lastname = :LASTNAME"),
+
+        @NamedQuery(
+                name = "Employee.retrieveEmployeeByPartOfName",
+                query = "FROM Employee WHERE lastname LIKE CONCAT('%',:EMPLOYEEPARTOFLASTNAME,'%')"
+        )
+})
 
 @Entity
 @Table(name = "EMPLOYEES")
